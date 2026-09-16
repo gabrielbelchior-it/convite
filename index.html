@@ -227,23 +227,42 @@
     <script>
         // L&#243;gica do bot&#227;o fuj&#227;o
         const btnNo = document.getElementById('btn-no');
-        
-        btnNo.addEventListener('mouseover', function() {
-            // Muda a posi&#231;&#227;o para fixed para poder mover pela tela toda
-            this.style.position = 'fixed';
-            
-            // Calcula posi&#231;&#245;es aleat&#243;rias dentro do tamanho da janela vis&#237;vel
-            const maxX = window.innerWidth - this.offsetWidth - 20;
-            const maxY = window.innerHeight - this.offsetHeight - 20;
-            
-            const randomX = Math.max(20, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(20, Math.floor(Math.random() * maxY));
-            
-            this.style.left = randomX + 'px';
-            this.style.top = randomY + 'px';
-        });
 
-        // Previne clique caso o usu&#225;rio seja muito r&#225;pido
+        function escapar() {
+            // Garante posi&#231;&#227;o fixed para poder mover pela tela toda
+            btnNo.style.position = 'fixed';
+
+            // Usa as dimens&#245;es reais do bot&#227;o para nunca sair da tela
+            const w = btnNo.offsetWidth;
+            const h = btnNo.offsetHeight;
+            const maxX = Math.max(0, window.innerWidth - w - 10);
+            const maxY = Math.max(0, window.innerHeight - h - 10);
+
+            const randomX = Math.floor(Math.random() * maxX) + 5;
+            const randomY = Math.floor(Math.random() * maxY) + 5;
+
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top  = randomY + 'px';
+        }
+
+        // Desktop: foge ao passar o mouse
+        btnNo.addEventListener('mouseover', escapar);
+
+        // Mobile: foge ao primeiro toque, antes do clique ser disparado
+        btnNo.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // bloqueia o clique sintetizado pelo browser
+            escapar();
+        }, { passive: false });
+
+        // Cobertura extra para pointer events (ex: stylus, caneta)
+        btnNo.addEventListener('pointerdown', function(e) {
+            if (e.pointerType !== 'mouse') {
+                e.preventDefault();
+                escapar();
+            }
+        }, { passive: false });
+
+        // Previne qualquer clique residual
         btnNo.addEventListener('click', function(e) {
             e.preventDefault();
         });
