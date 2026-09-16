@@ -80,7 +80,7 @@
             display: block;
         }
 
-        /* Círculo onde fica a lua */
+        /* Área da lua */
         .cat-img {
             width: 120px;
             height: 120px;
@@ -93,7 +93,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* LUA CHEIA */
+        /* Lua cheia */
         .moon {
             width: 70px;
             height: 70px;
@@ -139,7 +139,6 @@
                 0 0 35px rgba(190,205,230,0.25);
         }
 
-        /* Crateras extras */
         .moon::before {
             content: "";
             position: absolute;
@@ -156,6 +155,7 @@
                 11px 21px 0 -1px rgba(150,150,150,0.18);
         }
 
+        /* Botões */
         .btn-group {
             display: flex;
             justify-content: center;
@@ -195,29 +195,6 @@
             margin-top: 20px;
         }
 
-        .input-group {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        input[type="date"],
-        input[type="time"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            background: #fafafa;
-        }
-
         .food-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -251,41 +228,6 @@
             font-size: 24px;
             margin-bottom: 5px;
         }
-
-        .summary-card {
-            background: #fafafa;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: left;
-            border: 1px dashed #ccc;
-        }
-
-        .summary-row {
-            display: flex;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .summary-row:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .summary-label {
-            width: 60px;
-            font-weight: bold;
-            color: #888;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .summary-value {
-            color: #333;
-            font-weight: 600;
-            font-size: 14px;
-        }
     </style>
 </head>
 
@@ -315,7 +257,7 @@
                     class="btn-yes"
                     onclick="nextScreen('screen2'); triggerConfetti();"
                 >
-                    Sim, aceito &lt;3
+                    Bora
                 </button>
 
                 <button
@@ -332,102 +274,7 @@
         <!-- TELA 2 -->
         <div id="screen2" class="screen">
 
-            <h1>
-                😳 Opa, nunca cheguei nessa parte...
-            </h1>
-
-            <p>
-                Bom, agora deixa comigo 😏
-            </p>
-
-        </div>
-
-        <!-- TELA 3 -->
-        <div id="screen3" class="screen">
-
-            <span class="subtitle">
-                Parte séria da noite
-            </span>
-
-            <h1>
-                O que você quer comer?
-            </h1>
-
-            <p style="font-size:12px;">
-                Escolha uma. Eu cuido da reserva,
-                do caminho e de fingir que sei escolher vinho.
-            </p>
-
-            <div
-                class="food-grid"
-                id="foodGrid"
-            >
-
-                <div
-                    class="food-item"
-                    onclick="selectFood(this, 'Pizza')"
-                >
-                    <span>🍕</span>
-                    Pizza
-                </div>
-
-                <div
-                    class="food-item"
-                    onclick="selectFood(this, 'Sushi')"
-                >
-                    <span>🍣</span>
-                    Sushi
-                </div>
-
-                <div
-                    class="food-item"
-                    onclick="selectFood(this, 'Hot Dog')"
-                >
-                    <span>🌭</span>
-                    Hot Dog
-                </div>
-
-                <div
-                    class="food-item"
-                    onclick="selectFood(this, 'Hambúrguer')"
-                >
-                    <span>🍔</span>
-                    Lanche
-                </div>
-
-                <div
-                    class="food-item"
-                    onclick="selectFood(this, 'Carne')"
-                >
-                    <span>🥩</span>
-                    Carne
-                </div>
-
-                <div
-                    class="food-item"
-                    onclick="selectFood(this, 'Italiano')"
-                >
-                    <span>🍝</span>
-                    Italiano
-                </div>
-
-            </div>
-
-            <button
-                class="btn-primary"
-                onclick="finishSetup()"
-            >
-                Confirmar encontro &lt;3
-            </button>
-
-        </div>
-
-        <!-- TELA 4 -->
-        <div id="screen4" class="screen">
-
-            <h1>
-                😳 Opa, nunca cheguei nessa parte...
-            </h1>
+            <h1>😳 Opa, nunca cheguei nessa parte...</h1>
 
             <p>
                 Bom, agora deixa comigo 😏
@@ -439,46 +286,33 @@
 
     <script>
 
-        const btnNo =
-            document.getElementById('btn-no');
+        const btnNo = document.getElementById('btn-no');
 
         function escapar() {
 
             btnNo.style.position = 'fixed';
 
-            const w =
-                btnNo.offsetWidth;
+            const w = btnNo.offsetWidth;
+            const h = btnNo.offsetHeight;
 
-            const h =
-                btnNo.offsetHeight;
+            const maxX = Math.max(
+                0,
+                window.innerWidth - w - 10
+            );
 
-            const maxX =
-                Math.max(
-                    0,
-                    window.innerWidth - w - 10
-                );
-
-            const maxY =
-                Math.max(
-                    0,
-                    window.innerHeight - h - 10
-                );
+            const maxY = Math.max(
+                0,
+                window.innerHeight - h - 10
+            );
 
             const randomX =
-                Math.floor(
-                    Math.random() * maxX
-                ) + 5;
+                Math.floor(Math.random() * maxX) + 5;
 
             const randomY =
-                Math.floor(
-                    Math.random() * maxY
-                ) + 5;
+                Math.floor(Math.random() * maxY) + 5;
 
-            btnNo.style.left =
-                randomX + 'px';
-
-            btnNo.style.top =
-                randomY + 'px';
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
         }
 
         /* PC */
@@ -487,17 +321,14 @@
             escapar
         );
 
-        /* CELULAR */
+        /* Celular */
         btnNo.addEventListener(
             'pointerdown',
             function(e) {
 
-                if (
-                    e.pointerType !== 'mouse'
-                ) {
+                if (e.pointerType !== 'mouse') {
 
                     e.preventDefault();
-
                     escapar();
                 }
             }
@@ -509,7 +340,6 @@
             function(e) {
 
                 e.preventDefault();
-
                 escapar();
             }
         );
@@ -519,10 +349,7 @@
             document
                 .querySelectorAll('.screen')
                 .forEach(
-                    s =>
-                        s.classList.remove(
-                            'active'
-                        )
+                    s => s.classList.remove('active')
                 );
 
             document
@@ -530,122 +357,19 @@
                 .classList.add('active');
         }
 
-        let selectedFood = '';
-
-        function selectFood(
-            element,
-            foodName
-        ) {
-
-            document
-                .querySelectorAll(
-                    '.food-item'
-                )
-                .forEach(
-                    item =>
-                        item.classList.remove(
-                            'selected'
-                        )
-                );
-
-            element
-                .classList.add(
-                    'selected'
-                );
-
-            selectedFood =
-                foodName;
-        }
-
-        function finishSetup() {
-
-            const dateVal =
-                document
-                    .getElementById(
-                        'dateInput'
-                    ).value;
-
-            const timeVal =
-                document
-                    .getElementById(
-                        'timeInput'
-                    ).value;
-
-            if (
-                !dateVal ||
-                !selectedFood
-            ) {
-
-                alert(
-                    "Por favor, escolha um dia e o que vamos comer!"
-                );
-
-                return;
-            }
-
-            const dateObj =
-                new Date(
-                    dateVal +
-                    'T12:00:00'
-                );
-
-            const formattedDate =
-                dateObj
-                    .toLocaleDateString(
-                        'pt-BR',
-                        {
-                            weekday: 'long',
-                            day: 'numeric',
-                            month: 'long'
-                        }
-                    );
-
-            document
-                .getElementById(
-                    'resDate'
-                )
-                .textContent =
-                    formattedDate;
-
-            document
-                .getElementById(
-                    'resTime'
-                )
-                .textContent =
-                    timeVal + 'h';
-
-            document
-                .getElementById(
-                    'resFood'
-                )
-                .textContent =
-                    selectedFood;
-
-            nextScreen(
-                'screen4'
-            );
-
-            triggerConfetti();
-        }
-
         function triggerConfetti() {
 
             confetti({
-
                 particleCount: 150,
-
                 spread: 70,
-
                 origin: {
                     y: 0.6
                 },
-
                 colors: [
                     '#d81b60',
                     '#ffc107',
                     '#00bcd4'
                 ]
-
             });
         }
 
