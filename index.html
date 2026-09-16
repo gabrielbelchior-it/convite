@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Título neutro para não entregar o convite na prévia -->
     <title>...</title>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -189,6 +188,16 @@
             color: #666;
             position: relative;
         }
+
+        /* Tela final */
+        .final-emoji {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .final-title {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 
@@ -232,14 +241,12 @@
 
         </div>
 
-        <!-- TELA DEPOIS DO BORA -->
+        <!-- TELA FINAL -->
         <div id="screen2" class="screen">
 
-            <h1>😳 Opa, nunca cheguei nessa parte...</h1>
+            <div class="final-emoji">👍</div>
 
-            <p>
-                Bom, agora deixa comigo 😏
-            </p>
+            <h1 class="final-title">Fechou!</h1>
 
         </div>
 
@@ -289,7 +296,7 @@
 
         });
 
-        /* Impede clicar no botão Não */
+        /* Impede clicar no Não */
         btnNo.addEventListener('click', function(e) {
             e.preventDefault();
             escapar();
