@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Um Convite Especial</title>
 
-    <!-- Biblioteca para o efeito de confetes -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
@@ -59,7 +58,6 @@
             }
         }
 
-        /* Tipografia */
         h1 {
             font-size: 24px;
             margin-bottom: 10px;
@@ -82,7 +80,7 @@
             display: block;
         }
 
-        /* Área da lua */
+        /* Círculo onde fica a lua */
         .cat-img {
             width: 120px;
             height: 120px;
@@ -95,30 +93,69 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Lua crescente */
+        /* LUA CHEIA */
         .moon {
-            width: 64px;
-            height: 64px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: #f7d774;
             position: relative;
+
+            background:
+                radial-gradient(
+                    circle at 30% 32%,
+                    rgba(170,170,170,0.30) 0 4px,
+                    transparent 5px
+                ),
+                radial-gradient(
+                    circle at 67% 25%,
+                    rgba(160,160,160,0.22) 0 6px,
+                    transparent 7px
+                ),
+                radial-gradient(
+                    circle at 63% 63%,
+                    rgba(170,170,170,0.28) 0 8px,
+                    transparent 9px
+                ),
+                radial-gradient(
+                    circle at 27% 70%,
+                    rgba(160,160,160,0.20) 0 5px,
+                    transparent 6px
+                ),
+                radial-gradient(
+                    circle at 48% 48%,
+                    rgba(180,180,180,0.18) 0 3px,
+                    transparent 4px
+                ),
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #e8e8e4
+                );
+
             box-shadow:
-                0 0 8px rgba(247, 215, 116, 0.45),
-                0 0 18px rgba(247, 215, 116, 0.2);
+                inset -8px -6px 12px rgba(120,120,120,0.12),
+                0 0 8px rgba(255,255,255,1),
+                0 0 20px rgba(190,205,230,0.55),
+                0 0 35px rgba(190,205,230,0.25);
         }
 
-        .moon::after {
+        /* Crateras extras */
+        .moon::before {
             content: "";
             position: absolute;
-            width: 58px;
-            height: 58px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            background: #f5f5f5;
-            top: -7px;
-            left: 20px;
+            background: rgba(160,160,160,0.18);
+            left: 17px;
+            top: 35px;
+
+            box-shadow:
+                26px -18px 0 2px rgba(170,170,170,0.15),
+                33px 11px 0 1px rgba(160,160,160,0.18),
+                11px 21px 0 -1px rgba(150,150,150,0.18);
         }
 
-        /* Botões */
         .btn-group {
             display: flex;
             justify-content: center;
@@ -158,7 +195,6 @@
             margin-top: 20px;
         }
 
-        /* Inputs e Grid */
         .input-group {
             text-align: left;
             margin-bottom: 20px;
@@ -216,7 +252,6 @@
             margin-bottom: 5px;
         }
 
-        /* Tela Final */
         .summary-card {
             background: #fafafa;
             border-radius: 10px;
@@ -258,12 +293,11 @@
 
     <div class="container">
 
-        <!-- TELA 1: O Convite -->
+        <!-- TELA 1 -->
         <div id="screen1" class="screen active">
 
             <span class="subtitle">Um Convite</span>
 
-            <!-- Lua crescente -->
             <div class="cat-img">
                 <div class="moon"></div>
             </div>
@@ -271,8 +305,8 @@
             <h1>Você aceita sair comigo?</h1>
 
             <p>
-                Sem pressão. Sério. Só uma noite, uma boa conversa e a chance
-                de eu te fazer rir pelo menos três vezes.
+                Sem pressão. Sério. Só uma noite, uma boa conversa
+                e a chance de eu te fazer rir pelo menos três vezes.
             </p>
 
             <div class="btn-group">
@@ -284,17 +318,23 @@
                     Sim, aceito &lt;3
                 </button>
 
-                <button class="btn-no" id="btn-no">
+                <button
+                    class="btn-no"
+                    id="btn-no"
+                >
                     Não
                 </button>
 
             </div>
+
         </div>
 
-        <!-- TELA 2: Reação -->
+        <!-- TELA 2 -->
         <div id="screen2" class="screen">
 
-            <h1>😳 Opa, nunca cheguei nessa parte...</h1>
+            <h1>
+                😳 Opa, nunca cheguei nessa parte...
+            </h1>
 
             <p>
                 Bom, agora deixa comigo 😏
@@ -302,7 +342,7 @@
 
         </div>
 
-        <!-- TELA 3: Comida -->
+        <!-- TELA 3 -->
         <div id="screen3" class="screen">
 
             <span class="subtitle">
@@ -314,11 +354,14 @@
             </h1>
 
             <p style="font-size:12px;">
-                Escolha uma. Eu cuido da reserva, do caminho
-                e de fingir que sei escolher vinho.
+                Escolha uma. Eu cuido da reserva,
+                do caminho e de fingir que sei escolher vinho.
             </p>
 
-            <div class="food-grid" id="foodGrid">
+            <div
+                class="food-grid"
+                id="foodGrid"
+            >
 
                 <div
                     class="food-item"
@@ -379,7 +422,7 @@
 
         </div>
 
-        <!-- TELA 4: Resumo Final -->
+        <!-- TELA 4 -->
         <div id="screen4" class="screen">
 
             <h1>
@@ -396,31 +439,40 @@
 
     <script>
 
-        // Botão "Não"
-        const btnNo = document.getElementById('btn-no');
+        const btnNo =
+            document.getElementById('btn-no');
 
         function escapar() {
 
             btnNo.style.position = 'fixed';
 
-            const w = btnNo.offsetWidth;
-            const h = btnNo.offsetHeight;
+            const w =
+                btnNo.offsetWidth;
 
-            const maxX = Math.max(
-                0,
-                window.innerWidth - w - 10
-            );
+            const h =
+                btnNo.offsetHeight;
 
-            const maxY = Math.max(
-                0,
-                window.innerHeight - h - 10
-            );
+            const maxX =
+                Math.max(
+                    0,
+                    window.innerWidth - w - 10
+                );
+
+            const maxY =
+                Math.max(
+                    0,
+                    window.innerHeight - h - 10
+                );
 
             const randomX =
-                Math.floor(Math.random() * maxX) + 5;
+                Math.floor(
+                    Math.random() * maxX
+                ) + 5;
 
             const randomY =
-                Math.floor(Math.random() * maxY) + 5;
+                Math.floor(
+                    Math.random() * maxY
+                ) + 5;
 
             btnNo.style.left =
                 randomX + 'px';
@@ -429,18 +481,20 @@
                 randomY + 'px';
         }
 
-        // PC
+        /* PC */
         btnNo.addEventListener(
             'mouseenter',
             escapar
         );
 
-        // Celular
+        /* CELULAR */
         btnNo.addEventListener(
             'pointerdown',
             function(e) {
 
-                if (e.pointerType !== 'mouse') {
+                if (
+                    e.pointerType !== 'mouse'
+                ) {
 
                     e.preventDefault();
 
@@ -449,7 +503,7 @@
             }
         );
 
-        // Não deixa clicar
+        /* Impede clicar no Não */
         btnNo.addEventListener(
             'click',
             function(e) {
@@ -460,13 +514,15 @@
             }
         );
 
-        // Troca de telas
         function nextScreen(screenId) {
 
             document
                 .querySelectorAll('.screen')
                 .forEach(
-                    s => s.classList.remove('active')
+                    s =>
+                        s.classList.remove(
+                            'active'
+                        )
                 );
 
             document
@@ -474,7 +530,6 @@
                 .classList.add('active');
         }
 
-        // Seleção de comida
         let selectedFood = '';
 
         function selectFood(
@@ -483,27 +538,43 @@
         ) {
 
             document
-                .querySelectorAll('.food-item')
+                .querySelectorAll(
+                    '.food-item'
+                )
                 .forEach(
                     item =>
-                        item.classList.remove('selected')
+                        item.classList.remove(
+                            'selected'
+                        )
                 );
 
-            element.classList.add('selected');
+            element
+                .classList.add(
+                    'selected'
+                );
 
-            selectedFood = foodName;
+            selectedFood =
+                foodName;
         }
 
-        // Finalizar
         function finishSetup() {
 
             const dateVal =
-                document.getElementById('dateInput').value;
+                document
+                    .getElementById(
+                        'dateInput'
+                    ).value;
 
             const timeVal =
-                document.getElementById('timeInput').value;
+                document
+                    .getElementById(
+                        'timeInput'
+                    ).value;
 
-            if (!dateVal || !selectedFood) {
+            if (
+                !dateVal ||
+                !selectedFood
+            ) {
 
                 alert(
                     "Por favor, escolha um dia e o que vamos comer!"
@@ -514,40 +585,49 @@
 
             const dateObj =
                 new Date(
-                    dateVal + 'T12:00:00'
+                    dateVal +
+                    'T12:00:00'
                 );
 
             const formattedDate =
-                dateObj.toLocaleDateString(
-                    'pt-BR',
-                    {
-                        weekday: 'long',
-                        day: 'numeric',
-                        month: 'long'
-                    }
-                );
+                dateObj
+                    .toLocaleDateString(
+                        'pt-BR',
+                        {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'long'
+                        }
+                    );
 
             document
-                .getElementById('resDate')
+                .getElementById(
+                    'resDate'
+                )
                 .textContent =
                     formattedDate;
 
             document
-                .getElementById('resTime')
+                .getElementById(
+                    'resTime'
+                )
                 .textContent =
                     timeVal + 'h';
 
             document
-                .getElementById('resFood')
+                .getElementById(
+                    'resFood'
+                )
                 .textContent =
                     selectedFood;
 
-            nextScreen('screen4');
+            nextScreen(
+                'screen4'
+            );
 
             triggerConfetti();
         }
 
-        // Confetes
         function triggerConfetti() {
 
             confetti({
@@ -565,6 +645,7 @@
                     '#ffc107',
                     '#00bcd4'
                 ]
+
             });
         }
 
