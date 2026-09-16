@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Um Convite Especial</title>
+
+    <!-- Título neutro para não entregar o convite na prévia -->
+    <title>...</title>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -81,7 +83,7 @@
         }
 
         /* Área da lua */
-        .cat-img {
+        .moon-area {
             width: 120px;
             height: 120px;
             border-radius: 50%;
@@ -187,47 +189,6 @@
             color: #666;
             position: relative;
         }
-
-        .btn-primary {
-            background-color: #d81b60;
-            color: white;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .food-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .food-item {
-            background: #fafafa;
-            border: 1px solid #ddd;
-            padding: 15px 5px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .food-item:hover {
-            border-color: #d81b60;
-        }
-
-        .food-item.selected {
-            border-color: #d81b60;
-            background-color: #fff0f5;
-            color: #d81b60;
-        }
-
-        .food-item span {
-            display: block;
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
     </style>
 </head>
 
@@ -235,16 +196,16 @@
 
     <div class="container">
 
-        <!-- TELA 1 -->
+        <!-- TELA INICIAL -->
         <div id="screen1" class="screen active">
 
             <span class="subtitle">Um Convite</span>
 
-            <div class="cat-img">
+            <div class="moon-area">
                 <div class="moon"></div>
             </div>
 
-            <h1>Você aceita sair comigo?</h1>
+            <h1>E aí, bora sair comigo?</h1>
 
             <p>
                 Sem pressão. Sério. Só uma noite, uma boa conversa
@@ -271,7 +232,7 @@
 
         </div>
 
-        <!-- TELA 2 -->
+        <!-- TELA DEPOIS DO BORA -->
         <div id="screen2" class="screen">
 
             <h1>😳 Opa, nunca cheguei nessa parte...</h1>
@@ -316,40 +277,31 @@
         }
 
         /* PC */
-        btnNo.addEventListener(
-            'mouseenter',
-            escapar
-        );
+        btnNo.addEventListener('mouseenter', escapar);
 
         /* Celular */
-        btnNo.addEventListener(
-            'pointerdown',
-            function(e) {
+        btnNo.addEventListener('pointerdown', function(e) {
 
-                if (e.pointerType !== 'mouse') {
-
-                    e.preventDefault();
-                    escapar();
-                }
-            }
-        );
-
-        /* Impede clicar no Não */
-        btnNo.addEventListener(
-            'click',
-            function(e) {
-
+            if (e.pointerType !== 'mouse') {
                 e.preventDefault();
                 escapar();
             }
-        );
 
+        });
+
+        /* Impede clicar no botão Não */
+        btnNo.addEventListener('click', function(e) {
+            e.preventDefault();
+            escapar();
+        });
+
+        /* Troca de tela */
         function nextScreen(screenId) {
 
             document
                 .querySelectorAll('.screen')
                 .forEach(
-                    s => s.classList.remove('active')
+                    screen => screen.classList.remove('active')
                 );
 
             document
@@ -357,6 +309,7 @@
                 .classList.add('active');
         }
 
+        /* Confetes */
         function triggerConfetti() {
 
             confetti({
@@ -371,6 +324,7 @@
                     '#00bcd4'
                 ]
             });
+
         }
 
     </script>
